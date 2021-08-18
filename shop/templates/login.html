@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<span>если нету акка, то тебе сюда -> <a href="{% url 'register' %}">зарегистрироваться!</a></span><br><br>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <span>юзернейм:</span>
+    {{ form.username }}
+    <br>
+    <span>пароль:</span>
+    {{ form.password }}
+
+    {{ form.errors }}
+    <br>
+    <input type="submit" value="залогиниться">
+</form>
+{% endblock %}

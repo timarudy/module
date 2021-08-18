@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    {% for obj in object_list %}
+    <div>
+        <span>название товара - {{ obj.name }}</span><br>
+        <span>описание - {{ obj.description }}</span><br>
+        <span>цена - {{ obj.price }} гривен</span><br>
+        <span>в наличии - {{ obj.in_stock }} штук</span>
+
+        {% if request.user.is_superuser %}
+
+            <form method="post" action="{% url 'update_item' obj.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="обновить товар">
+            </form>
+
+        {% endif %} <br>
+    </div>
+
+    {% if request.user.is_authenticated and not request.user.is_superuser%}
+
+    <form method="get">
+
+        <span>сколько вы хотите купить данного товара - {{ obj.amount }}</span> <br>
+
+        <input type="submit" value="купить">
+    </form> <br><br>
+
+    {% endif %}
+
+    {% endfor %}
+</div>
+<div>
+    <a href="{% url 'mainpage' %}">на главную страницу</a>
+</div>
+
+
+
+
+{% endblock %}

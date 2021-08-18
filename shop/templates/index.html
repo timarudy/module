@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.user.is_superuser %}
+{# superuser display #}
+
+<span>приветствую, админ {{ request.user.username }}! </span>
+<div>
+    <a href="{% url 'items' %}">просмотр/обновление товаров</a><br>
+    <a href="{% url 'add_item' %}">добавление товара</a><br>
+    <a href="">просмотр возвратов</a>
+</div><br><br>
+<div>
+    <a href="{% url 'logout' %}">выйти</a>
+</div>
+
+
+
+
+{% elif request.user.is_authenticated %}
+{# logged in user display #}
+
+<span>приветствую, {{ request.user.username }}! </span><br>
+<span>ваш баланс: {{request.user.wallet}} гривен</span><br><br>
+<div>
+    <a href="{% url 'items' %}">просмотр товаров</a><br>
+    <a href="">совершенные покупки</a>
+</div><br><br>
+<div>
+    <a href="{% url 'logout' %}">выйти</a>
+</div>
+
+
+
+
+{% else %}
+{# not logged in user display #}
+
+<span>приветствую!</span><br>
+<div>
+    <a href="{% url 'items' %}">просмотр товаров</a><br>
+</div><br><br>
+<div>
+    <a href="{% url 'login' %}">залогиниться</a> <br>
+    <a href="{% url 'register' %}">зарегистрироваться</a></span>
+</div>
+
+
+
+
+{% endif %}
+
+{% endblock %}

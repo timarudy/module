@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form method="post">{% csrf_token %}
+    
+    <span>название - {{ form.name }}</span> <br>
+    <span>описание - {{ form.description }}</span> <br>
+    <span>цена - {{ form.price }}</span> <br>
+    <span>в наличии - {{ form.in_stock }}</span> <br><br>
+
+    <input type="submit" value="создать товар">
+</form>
+
+
+{% endblock %}
